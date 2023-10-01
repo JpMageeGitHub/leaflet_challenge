@@ -4,7 +4,7 @@ let greyscale = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 });
 
 // Set up our query URL
-const url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson';
+const url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/1.0_month.geojson';
 
 // Start our geoJSON request
 d3.json(url).then(function (data) {
@@ -15,7 +15,7 @@ d3.json(url).then(function (data) {
 
 // Function to determine marker size
 function markerSize(magnitude) {
-    return magnitude * 100000;
+    return magnitude * 40000;
 };
 
 // Function to determine marker color by depth
@@ -46,7 +46,7 @@ function createFeatures(earthquakeData) {
             var markers = {
                 radius: markerSize(feature.properties.mag),
                 fillColor: chooseColor(feature.geometry.coordinates[2]),
-                fillOpacity: 0.5,
+                fillOpacity: 0.3,
                 color: "black",
                 stroke: true,
                 weight: 1
@@ -83,7 +83,7 @@ function createMap(earthquakes) {
 
     // Create our map, giving it the streetmap and earthquakes layers to display on load.
     var myMap = L.map("map", {
-        center: [41, 35],
+        center: [39.82, -98.58],
         zoom: 3,
         layers: [street, earthquakes]
     });
